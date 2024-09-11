@@ -127,9 +127,10 @@ uint64_t host::echo(char * argv) // for getting values bigger than the 32 bits t
   char cmd[256];
 
   sprintf(cmd, "echo $((%s))", argv);
-
+#if 0
   in = popen(cmd, "r");
   getline(&line, &len, in);
+#endif
   value = atol(line);
 
   return value;

@@ -24,24 +24,25 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include <omp.h>
-#include <primesieve.h>
 #include <vector>
 #include "CUDASieve/cstest.hpp"
+#include <primesieve.h>
 
 using namespace boost::multiprecision;
 
+boost::random::ranlux48_base rng1;
+boost::random::lagged_fibonacci44497 rng2;
+boost::random::mt19937 rng3;
+boost::random::uniform_int_distribution<> dist(0, 225726412); // 2^27.5 (to account for top of range below 2^64)
+boost::random::uniform_int_distribution<> dist_exp(1, 36);
+boost::random::uniform_int_distribution<> dist_exp_range(2, 25);
+boost::random::uniform_int_distribution<> dist_bool(0, 1);
+boost::random::uniform_int_distribution<> dist_range_count(12, 2000000000);
+boost::random::uniform_int_distribution<> dist_range_small(1024, 65536);
+boost::random::uniform_int_distribution<> dist_range_test(16, 128);
+
 int main()
 {
-  boost::random::ranlux48_base rng1;
-  boost::random::lagged_fibonacci44497 rng2;
-  boost::random::mt19937 rng3;
-  boost::random::uniform_int_distribution<> dist(0,225726412); // 2^27.5 (to account for top of range below 2^64)
-  boost::random::uniform_int_distribution<> dist_exp(1,36);
-  boost::random::uniform_int_distribution<> dist_exp_range(2,25);
-  boost::random::uniform_int_distribution<> dist_bool(0,1);
-  boost::random::uniform_int_distribution<> dist_range_count(12,2000000000);
-  boost::random::uniform_int_distribution<> dist_range_small(1024,65536);
-  boost::random::uniform_int_distribution<> dist_range_test(16,128);
 
   size_t len;
   uint16_t testNum, gpuNum = 0;

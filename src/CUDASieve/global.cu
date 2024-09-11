@@ -12,7 +12,8 @@ start around 350.  The above statement may become inaccurate at any time.
 
 #include <cuda.h>
 #include <cuda_runtime.h>
-//#include <cuda_runtime.h>
+#include <device_launch_parameters.h>
+#include <device_functions.h>
 #include <iostream>
 
 #include "CUDASieve/device.cuh"
@@ -148,7 +149,7 @@ __global__ void device::smallSieve(uint32_t * d_primeList, volatile uint64_t * d
          e.g. 0 to 10^12 */
   float pstop = sqrtf(bstart + 2*sieveBits);
   unsigned int piHighGuess = (pstop/log(pstop))*(1+1.2762/log(pstop));
-  primeListLength = min((unsigned int) primeListLength, piHighGuess);
+  primeListLength =  primeListLength>piHighGuess ? piHighGuess : primeListLength;
 
   device::sieveInit(s_sieve, sieveWords);                 // (1)
   device::sieveSmallPrimes(s_sieve, sieveWords, bstart);  // (2)

@@ -3,7 +3,6 @@
 #include <math.h>
 #include <thrust/reduce.h>
 #include <thrust/execution_policy.h>
-
 #include "CUDASieve/cudasieve.hpp"
 
 int main()

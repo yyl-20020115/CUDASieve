@@ -35,7 +35,12 @@ __host__ __device__ static inline int64_t clzll(uint64_t x)
 #ifdef __CUDA_ARCH__
   res = __clzll(x);
 #else
+#ifdef _WIN32
+  unsigned long index = 0;
+  res = _BitScanReverse64(&index, x) == 0 ? 64ULL : (63ULL - index);
+#else
   asm("lzcnt %1, %0" : "=l" (res) : "l" (x));
+#endif
 #endif
   return res;
 }
