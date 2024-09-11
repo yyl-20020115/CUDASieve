@@ -4,7 +4,7 @@ add_executable(CUDASieveMain main.cpp)
 target_link_libraries(CUDASieveMain CUDASieve)
 
 
-set(ENABLE_TESTS OFF CACHE BOOL "Enable tests")
+option(ENABLE_TESTS OFF "Enable tests")
 if(${ENABLE_TESTS})
 find_package(boost REQUIRED)
 find_package(primesieve REQUIRED)

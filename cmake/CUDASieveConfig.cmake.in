@@ -1,0 +1,16 @@
+# ====================================================================
+# The CUDASieve CMake configuration file
+#
+# Usage from an external project:
+#     In your CMakeLists.txt, add these lines:
+#
+#     find_package(CUDASieve REQUIRED)
+#     target_link_libraries(your_program CUDASieve::CUDASieve)
+#
+# ====================================================================
+
+include(CMakeFindDependencyMacro)
+
+add_library(CUDASieve::CUDASieve INTERFACE IMPORTED)
+set_target_properties(CUDASieve::CUDASieve PROPERTIES INTERFACE_LINK_LIBRARIES "CUDASieve::CUDASieve")
+set_target_properties(CUDASieve::CUDASieve PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "@CMAKE_INSTALL_PREFIX@/include/")
