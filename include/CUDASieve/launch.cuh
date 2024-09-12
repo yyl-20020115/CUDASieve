@@ -29,7 +29,11 @@ The naming convention for sieve sizes:
   #define THREADS_PER_BLOCK_LG 256
 #endif
 
-__host__ __device__ static inline int64_t clzll(uint64_t x)
+#ifdef __CUDA_ARCH__
+//__host__ 
+__device__
+#endif
+static inline int64_t clzll(uint64_t x)
 {
   uint64_t res;
 #ifdef __CUDA_ARCH__

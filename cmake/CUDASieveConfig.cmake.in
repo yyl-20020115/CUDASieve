@@ -11,6 +11,10 @@
 
 include(CMakeFindDependencyMacro)
 
+set(CUDASieve_FOUND TRUE)
+set(CUDASieve_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include/")
+
 add_library(CUDASieve::CUDASieve INTERFACE IMPORTED)
 set_target_properties(CUDASieve::CUDASieve PROPERTIES INTERFACE_LINK_LIBRARIES "CUDASieve::CUDASieve")
-set_target_properties(CUDASieve::CUDASieve PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "@CMAKE_INSTALL_PREFIX@/include/")
+set_target_properties(CUDASieve::CUDASieve PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CUDASieve_INCLUDE_DIRS})
+
